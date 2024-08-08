@@ -4,13 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Rock Paper Scissors Game</h1>
-    <form id="rps-form">
+    <form id="mode-form">
         <label>
-            Choose:
-            <select id="user-choice">
+            Select Mode:
+            <select id="game-mode" onchange="toggleMode()">
+                <option value="player-vs-computer">Player vs. Computer</option>
+                <option value="player-vs-player">Player vs. Player</option>
+            </select>
+        </label>
+    </form>
+    <form id="rps-form">
+        <label id="player1-label">
+            Player 1 Choose:
+            <select id="player1-choice">
+                <option value="rock">Rock</option>
+                <option value="paper">Paper</option>
+                <option value="scissors">Scissors</option>
+            </select>
+        </label>
+        <label id="player2-label" style="display:none;">
+            Player 2 Choose:
+            <select id="player2-choice">
                 <option value="rock">Rock</option>
                 <option value="paper">Paper</option>
                 <option value="scissors">Scissors</option>
@@ -25,5 +43,9 @@
         <p>Ties: <span id="ties">0</span></p>
     </div>
     <button type="button" onclick="resetGame()">Reset</button>
+    <audio id="win-sound" src="win.mp3"></audio>
+    <audio id="lose-sound" src="lose.mp3"></audio>
+    <audio id="tie-sound" src="tie.mp3"></audio>
+    <script src="script.js"></script>
 </body>
 </html>

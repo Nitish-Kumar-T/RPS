@@ -1,63 +1,77 @@
 const choices = ['rock', 'paper', 'scissors'];
-    let wins = 0;
-    let losses = 0;
-    let ties = 0;
+let wins = 0;
+let losses = 0;
+let ties = 0;
 
-    function playGame() {
-        const userChoice = document.getElementById('user-choice').value;
-        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-        const result = getResult(userChoice, computerChoice);
-        
-        updateScore(result);
-        displayResult(userChoice, computerChoice, result);
+function toggleMode() {
+    const mode = document.getElementById('game-mode').value;
+    const player2Label = document.getElementById('player2-label');
+
+    if (mode === 'player-vs-player') {
+        player2Label.style.display = 'inline';
+    } else {
+        player2Label.style.display = 'none';
+    }
+}
+
+function playGame() {
+    const mode = document.getElementById('game-mode').value;
+    const player1Choice = document.getElementById('player1-choice').value;
+    let player2Choice;
+    
+    if (mode === 'player-vs-player') {
+        player2Choice = document.getElementById('player2-choice').value;
+    } else {
+        player2Choice = choices[Math.floor(Math.random() * choices.length)];
     }
 
-    /**
-     * Determine the result of the game
-     * @param {string} userChoice 
-     * @param {string} computerChoice 
-     * @returns {string} Result of the game ('win', 'lose', 'tie')
-     */
-    function getResult(userChoice, computerChoice) {
-        if (userChoice === computerChoice) return 'tie';
-        if ((userChoice === 'rock' && computerChoice === 'scissors') ||
-            (userChoice === 'paper' && computerChoice === 'rock') ||
-            (userChoice === 'scissors' && computerChoice === 'paper')) return 'win';
-        return 'lose';
-    }
+    const result = getResult(player1Choice, player2Choice);
+    updateScore(result);
+    displayResult(player1Choice, player2Choice, result);
+    playSound(result);
+}
 
-    /**
-     * Update the score based on the result
-     * @param {string} result 
-     */
-    function updateScore(result) {
-        if (result === 'win') wins++;
-        else if (result === 'lose') losses++;
-        else ties++;
-        
-        document.getElementById('wins').innerText = wins;
-        document.getElementById('losses').innerText = losses;
-        document.getElementById('ties').innerText = ties;
-    }
+function getResult(player1Choice, player2Choice) {
+    if (player1Choice === player2Choice) return 'tie';
+    if ((player1Choice === 'rock' && player2Choice === 'scissors') ||
+        (player1Choice === 'paper' && player2Choice === 'rock') ||
+        (player1Choice === 'scissors' && player2Choice === 'paper')) return 'win';
+    return 'lose';
+}
 
-    /**
-     * Display the result of the game
-     * @param {string} userChoice 
-     * @param {string} computerChoice 
-     * @param {string} result 
-     */
-    function displayResult(userChoice, computerChoice, result) {
-        let resultText = `You chose ${userChoice}, computer chose ${computerChoice}. `;
-        resultText += result === 'win' ? 'You win!' : result === 'lose' ? 'You lose!' : 'It\'s a tie!';
-        document.getElementById('result').innerText = resultText;
-    }
+function updateScore(result) {
+    if (result === 'win') wins++;
+    else if (result === 'lose') losses++;
+    else ties++;
+    
+    document.getElementById('wins').innerText = wins;
+    document.getElementById('losses').innerText = losses;
+    document.getElementById('ties').innerText = ties;
+}
 
-    function resetGame() {
-        wins = 0;
-        losses = 0;
-        ties = 0;
-        document.getElementById('wins').innerText = wins;
-        document.getElementById('losses').innerText = losses;
-        document.getElementById('ties').innerText = ties;
-        document.getElementById('result').innerText = '';
-    }
+function displayResult(player1Choice, player2Choice, result) {
+    let resultText = `Player 1 chose ${player1Choice}, Player 2 chose ${player2Choice}. `;
+    resultText += result === 'win' ? 'Player 1 wins!' : result === 'lose' ? 'Player 2 wins!' : 'It\'s a tie!';
+    document.getElementById('result').innerText = resultText;
+}
+
+function playSound(result) {
+    let sound;
+    if (result === 'win') sound = document.getElementById('win-sound');
+    else if (result === 'lose') sound = document.getElementById('lose-sound');
+    else sound = document.getElementById('tie-sound');
+    sound.play();
+}
+
+function resetGame() {
+    wins = 0;
+    losses = 0;
+    ties = 0;
+    document.getElementById('wins').innerText = wins;
+    document.getElementById('losses').innerText = losses;
+    document.getElementById('ties').innerText = ties;
+    document.getElementById('result').innerText = '';
+}
+
+// Initialize the game mode
+toggleMode();
