@@ -21,6 +21,7 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
+    margin: 5px;
 }
 button:hover {
     background-color: #45a049;
@@ -28,6 +29,15 @@ button:hover {
 #score {
     font-size: 18px;
     margin-top: 20px;
+}
+#history {
+    margin-top: 20px;
+    text-align: left;
+    display: inline-block;
+}
+#history-list {
+    list-style-type: none;
+    padding: 0;
 }
 
 @keyframes fadeIn {

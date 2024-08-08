@@ -2,15 +2,19 @@ const choices = ['rock', 'paper', 'scissors'];
 let wins = 0;
 let losses = 0;
 let ties = 0;
+let timer;
 
 function toggleMode() {
     const mode = document.getElementById('game-mode').value;
     const player2Label = document.getElementById('player2-label');
+    const difficultyForm = document.getElementById('difficulty-form');
 
     if (mode === 'player-vs-player') {
         player2Label.style.display = 'inline';
+        difficultyForm.style.display = 'none';
     } else {
         player2Label.style.display = 'none';
+        difficultyForm.style.display = 'inline';
     }
 }
 
@@ -22,13 +26,45 @@ function playGame() {
     if (mode === 'player-vs-player') {
         player2Choice = document.getElementById('player2-choice').value;
     } else {
-        player2Choice = choices[Math.floor(Math.random() * choices.length)];
+        player2Choice = getComputerChoice(player1Choice);
     }
 
     const result = getResult(player1Choice, player2Choice);
     updateScore(result);
     displayResult(player1Choice, player2Choice, result);
     playSound(result);
+}
+
+function getComputerChoice(player1Choice) {
+    const difficulty = document.getElementById('difficulty-level').value;
+    let choice;
+
+    if (difficulty === 'easy') {
+        // Random choice
+        choice = choices[Math.floor(Math.random() * choices.length)];
+    } else if (difficulty === 'medium') {
+        // 60% chance to choose randomly, 40% chance to choose winning move
+        if (Math.random() < 0.6) {
+            choice = choices[Math.floor(Math.random() * choices.length)];
+        } else {
+            choice = getWinningMove(player1Choice);
+        }
+    } else if (difficulty === 'hard') {
+        // 80% chance to choose winning move, 20% chance to choose randomly
+        if (Math.random() < 0.8) {
+            choice = getWinningMove(player1Choice);
+        } else {
+            choice = choices[Math.floor(Math.random() * choices.length)];
+        }
+    }
+
+    return choice;
+}
+
+function getWinningMove(player1Choice) {
+    if (player1Choice === 'rock') return 'paper';
+    if (player1Choice === 'paper') return 'scissors';
+    if (player1Choice === 'scissors') return 'rock';
 }
 
 function getResult(player1Choice, player2Choice) {
@@ -71,7 +107,23 @@ function resetGame() {
     document.getElementById('losses').innerText = losses;
     document.getElementById('ties').innerText = ties;
     document.getElementById('result').innerText = '';
+    clearTimeout(timer);
+    startTimer();
 }
 
-// Initialize the game mode
+function resetScoreboard() {
+    wins = 0;
+    losses = 0;
+    ties = 0;
+    document.getElementById('wins').innerText = wins;
+    document.getElementById('losses').innerText = losses;
+    document.getElementById('ties').innerText = ties;
+}
+
+function startTimer() {
+    timer = setTimeout(resetGame, 30000);
+}
+
+// Initialize the game mode and start the timer
 toggleMode();
+startTimer();
