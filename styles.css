@@ -1,46 +1,155 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
-    margin-top: 50px;
-    background-color: #f0f0f0;
-}
-#mode-form, #rps-form {
-    margin-bottom: 20px;
-}
-#result {
-    font-size: 20px;
-    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
     color: #333;
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50;
+    padding: 20px 0;
+    color: #fff;
+}
+
+h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e6e6e6;
+}
+
+/* Main Content Styles */
+main {
+    padding: 40px 20px;
+}
+
+#mode-form, #rps-form {
+    margin-bottom: 30px;
+}
+
+#result {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
     animation: fadeIn 1s ease-in-out;
 }
+
+/* Button Styles */
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 24px;
+    font-size: 18px;
     cursor: pointer;
     background-color: #4CAF50;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    margin: 5px;
+    margin: 10px;
+    transition: background-color 0.3s ease;
 }
+
 button:hover {
-    background-color: #45a049;
+    background-color: #3e8e41;
 }
+
+/* Score Styles */
 #score {
-    font-size: 18px;
-    margin-top: 20px;
+    font-size: 20px;
+    margin-top: 30px;
 }
+
+/* History Styles */
 #history {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: left;
-    display: inline-block;
 }
+
 #history-list {
     list-style-type: none;
     padding: 0;
 }
 
+/* Leaderboard Styles */
+#leaderboard {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 18px;
+}
+
+#leaderboard th, #leaderboard td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#leaderboard th {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+#leaderboard tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Animation */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    nav a {
+        font-size: 16px;
+    }
+
+    #result {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    #score {
+        font-size: 18px;
+    }
+
+    #leaderboard {
+        font-size: 16px;
+    }
 }

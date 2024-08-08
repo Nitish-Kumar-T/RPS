@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors with Difficulty Levels</title>
+    <title>Rock Paper Scissors with Statistics</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -51,8 +51,11 @@
         <p>Wins: <span id="wins">0</span></p>
         <p>Losses: <span id="losses">0</span></p>
         <p>Ties: <span id="ties">0</span></p>
+        <p>Win Percentage: <span id="win-percentage">0%</span></p>
     </div>
     <button type="button" onclick="resetScoreboard()">Reset Scoreboard</button>
+    <h2>Score History</h2>
+    <ul id="score-history"></ul>
     <audio id="win-sound" src="win.mp3"></audio>
     <audio id="lose-sound" src="lose.mp3"></audio>
     <audio id="tie-sound" src="tie.mp3"></audio>
