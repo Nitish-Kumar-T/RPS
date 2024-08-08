@@ -18,6 +18,34 @@ function toggleMode() {
     }
 }
 
+function toggleDifficulty() {
+    const mode = document.getElementById('game-mode').value;
+    const difficultyForm = document.getElementById('difficulty-form');
+
+    if (mode === 'player-vs-computer') {
+        difficultyForm.style.display = 'block';
+    } else {
+        difficultyForm.style.display = 'none';
+    }
+}
+
+function showLeaderboard() {
+    const leaderboardSection = document.getElementById('leaderboard-section');
+    leaderboardSection.style.display = 'block';
+}
+
+function resetGame() {
+    wins = 0;
+    losses = 0;
+    ties = 0;
+    document.getElementById('wins').innerText = wins;
+    document.getElementById('losses').innerText = losses;
+    document.getElementById('ties').innerText = ties;
+    document.getElementById('result').innerText = '';
+    clearTimeout(timer);
+    startTimer();
+}
+
 function playGame() {
     const mode = document.getElementById('game-mode').value;
     const player1Choice = document.getElementById('player1-choice').value;
@@ -33,6 +61,8 @@ function playGame() {
     updateScore(result);
     displayResult(player1Choice, player2Choice, result);
     playSound(result);
+    updateScoreHistory(player1Choice, player2Choice, result);
+    updateWinPercentage();
 }
 
 function getComputerChoice(player1Choice) {
@@ -99,16 +129,19 @@ function playSound(result) {
     sound.play();
 }
 
-function resetGame() {
-    wins = 0;
-    losses = 0;
-    ties = 0;
-    document.getElementById('wins').innerText = wins;
-    document.getElementById('losses').innerText = losses;
-    document.getElementById('ties').innerText = ties;
-    document.getElementById('result').innerText = '';
-    clearTimeout(timer);
-    startTimer();
+function updateScoreHistory(player1Choice, player2Choice, result) {
+    const scoreHistory = document.getElementById('score-history');
+    const historyItem = document.createElement('li');
+    let resultText = `Player 1 chose ${player1Choice}, Player 2 chose ${player2Choice}. `;
+    resultText += result === 'win' ? 'Player 1 wins!' : result === 'lose' ? 'Player 2 wins!' : 'It\'s a tie!';
+    historyItem.innerText = resultText;
+    scoreHistory.appendChild(historyItem);
+}
+
+function updateWinPercentage() {
+    const totalGames = wins + losses + ties;
+    const winPercentage = totalGames ? ((wins / totalGames) * 100).toFixed(2) : 0;
+    document.getElementById('win-percentage').innerText = `${winPercentage}%`;
 }
 
 function resetScoreboard() {
@@ -118,6 +151,8 @@ function resetScoreboard() {
     document.getElementById('wins').innerText = wins;
     document.getElementById('losses').innerText = losses;
     document.getElementById('ties').innerText = ties;
+    document.getElementById('win-percentage').innerText = '0%';
+    document.getElementById('score-history').innerHTML = '';
 }
 
 function startTimer() {

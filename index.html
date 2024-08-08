@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1>Rock Paper Scissors Game</h1>
+
+    <!-- Game Mode Selection -->
     <form id="mode-form">
         <label>
             Select Mode:
@@ -17,6 +19,8 @@
             </select>
         </label>
     </form>
+
+    <!-- Difficulty Selection for Player vs Computer Mode -->
     <form id="difficulty-form">
         <label>
             Select Difficulty:
@@ -27,6 +31,8 @@
             </select>
         </label>
     </form>
+
+    <!-- Rock Paper Scissors Choices -->
     <form id="rps-form">
         <label id="player1-label">
             Player 1 Choose:
@@ -46,19 +52,31 @@
         </label>
         <button type="button" onclick="playGame()">Play</button>
     </form>
+
+    <!-- Result Display -->
     <div id="result"></div>
+
+    <!-- Scoreboard -->
     <div id="score">
         <p>Wins: <span id="wins">0</span></p>
         <p>Losses: <span id="losses">0</span></p>
         <p>Ties: <span id="ties">0</span></p>
         <p>Win Percentage: <span id="win-percentage">0%</span></p>
     </div>
+
+    <!-- Reset Scoreboard Button -->
     <button type="button" onclick="resetScoreboard()">Reset Scoreboard</button>
+
+    <!-- Score History -->
     <h2>Score History</h2>
     <ul id="score-history"></ul>
+
+    <!-- Audio Files for Sound Effects -->
     <audio id="win-sound" src="win.mp3"></audio>
     <audio id="lose-sound" src="lose.mp3"></audio>
     <audio id="tie-sound" src="tie.mp3"></audio>
+
+    <!-- Script -->
     <script src="script.js"></script>
 </body>
 </html>
